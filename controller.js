@@ -20,77 +20,174 @@ class controller {
         } catch (e) {
             console.error(e)
         }
-
-    }
-    getegresados(res) {
-        egresados.find({}, (err, egresados) => {
-            if (err) throw err;
-            res.send(egresados);
-    })
-
-    }
-   setegresados(egresado, res) {
-       egresado.create(user, function(err, newegresado){
-           if(err) throw err;
-           res.send({status: 200, nU: newegresado});
-       })
-
-    }
+    };
     getusuarios(res) {
         usuarios.find({}, (err, usuarios) => {
             if (err) throw err;
             res.send(usuarios);
-    })
 
-  }
-   setusuarios(usuarios, res) {
-       usuarios.create(user, function(err, newusuarios){
-           if(err) throw err;
-           res.send({status: 200, nU: newusuarios});
-       })
+        });
+    }
+
+    getusuario(res, id) {
+        usuarios.find({ _id: id }, (err, usuario) => {
+            if (err) throw err;
+            res.send(usuario);
+        });
+    }
+
+    setusarios(res, data) {
+        usuarios.create(data, (err, newUsuarios) => {
+            if (err) throw err;
+            res.send({
+                status: 200,
+                nU: newUsuarios
+            });
+        })
+    }
+    delUsuarios(res, id) {
+        usuarios.deleteOne({
+            _id: id
+        }, (err) => {
+            if (err) throw err;
+            res.send('Eliminado!')
+        })
+    }
+    updateUsuario(res, id, datos) {
+        usuarios.updateOne({
+            _id: id
+        }, {
+                $set: {
+                    contraseña: datos.contraseña
+                }
+            })
+            .then(response => {
+                res.send({
+                    msg: "Actualizado!",
+                    raw: response
+                })
+            })
+            .catch(err => {
+                if (err) throw err;
+            })
+    }
+    //
+    getegresados(res) {
+        egresados.find({}, (err, egresados) => {
+            if (err) throw err;
+            res.send(egresados);
+
+        });
 
     }
+    delEgresado(res, id) {
+        egresados.deleteOne({
+            _id: id
+        }, (err) => {
+            if (err) throw err;
+            res.send('Eliminado!')
+        })
+    }
+    //
     getcomunicados(res) {
         comunicados.find({}, (err, comunicados) => {
             if (err) throw err;
             res.send(comunicados);
-    })
 
-  }
-   setcomunicados(comunicados, res) {
-       comunicados.create(user, function(err, newcomunicados){
-           if(err) throw err;
-           res.send({status: 200, nU: newcomunicados});
-       })
-
+        });
     }
+    updateComunicados(res, id, datos) {
+        comunicados.updateOne({
+            _id: id
+        }, {
+                $set: {
+                    titulo: datos.titulo
+                }
+            })
+            .then(response => {
+                res.send({
+                    msg: "Actualizado!",
+                    raw: response
+                })
+            })
+            .catch(err => {
+                if (err) throw err;
+            })
+    }
+    delComunicado(res, id) {
+        comunicados.deleteOne({
+            _id: id
+        }, (err) => {
+            if (err) throw err;
+            res.send('Eliminado!')
+        })
+    }
+    //
     getofertas(res) {
-        ofertas.find({}, (err,ofertas) => {
+        ofertas.find({}, (err, ofertas) => {
             if (err) throw err;
             res.send(ofertas);
-    })
 
-  }
-   setofertas(ofertas, res) {
-       ofertas.create(user, function(err, newofertas){
-           if(err) throw err;
-           res.send({status: 200, nU: newofertas});
-       })
-
+        });
     }
-    gettitulo(res){
+    updateOfertas(res, id, datos) {
+        ofertas.updateOne({
+            _id: id
+        }, {
+                $set: {
+                    descripcion: datos.descripcion
+                }
+            })
+            .then(response => {
+                res.send({
+                    msg: "Actualizado!",
+                    raw: response
+                })
+            })
+            .catch(err => {
+                if (err) throw err;
+            })
+    }
+    delOferta(res, id) {
+        ofertas.deleteOne({
+            _id: id
+        }, (err) => {
+            if (err) throw err;
+            res.send('Eliminado!')
+        })
+    }
+    gettitulo(res) {
         titulo.find({}, (err, titulo) => {
             if (err) throw err;
             res.send(titulo);
-    })
 
-      }
-   settitulo(titulo, res) {
-       titulo.create(user, function(err, newtitulo){
-           if(err) throw err;
-           res.send({status: 200, nU: newtitulo});
-       })
-
+        });
+    }
+    updateTitulo(res, id, datos) {
+        titulo.updateOne({
+            _id: id
+        }, {
+                $set: {
+                    fecha_expedicion: datos.fecha_expedicion
+                }
+            })
+            .then(response => {
+                res.send({
+                    msg: "Actualizado!",
+                    raw: response
+                })
+            })
+            .catch(err => {
+                if (err) throw err;
+            })
+    }
+    delTitulo(res, id) {
+        titulo.deleteOne({
+            _id: id
+        }, (err) => {
+            if (err) throw err;
+            res.send('Eliminado!')
+        })
     }
 }
-exports.controller = new controller
+exports.controller = new controller()
