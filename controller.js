@@ -28,7 +28,6 @@ class controller {
 
         });
     }
-
     getusuario(res, id) {
         usuarios.find({ _id: id }, (err, usuario) => {
             if (err) throw err;
