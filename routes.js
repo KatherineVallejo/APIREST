@@ -47,7 +47,7 @@ app.delete("/egresados", (req, res) => {
     controller.delEgresado(res, id);
 })
 //
-app.get("/comunicados/:id", (req, res) => {
+app.get("/comunicados", (req, res) => {
     controller.getcomunicados(res);
 })
 app.put("/comunicados/:id", (req, res) => {
